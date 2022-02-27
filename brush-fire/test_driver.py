@@ -6,7 +6,8 @@ def process_parameters():
     parser = argparse.ArgumentParser()
     parser.add_argument('test_file',
                         help='A test file containing graph data to run burn simulations on.')
-    return parser.parse_args()
+    args = parser.parse_args()
+    return args
 
 def main():
   test_file = process_parameters()
