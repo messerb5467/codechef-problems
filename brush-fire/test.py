@@ -31,7 +31,8 @@ class Test:
             # burnt.
             bush_proximities = [(node_idx, i) for i in edge_rels if i != node_idx]
             self.bush_graph.add_edges_from(bush_proximities)
-        self.sentimental_bushes = get_ints_from_string(self.file_context.readline())
+        sent_bush_str = self.file_context.readline() 
+        self.sentimental_bushes = get_ints_from_string(sent_bush_str) if len(sent_bush_str) >= 3 else [int(sent_bush_str.strip())]
 
     def __get_burn_status(self):
         return set([burn_status for _, burn_status in self.bush_graph.nodes(data='on_fire')])
