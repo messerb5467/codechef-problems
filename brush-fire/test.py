@@ -1,5 +1,6 @@
 import networkx as nx
 import logging
+import sys
 from bush import Bush
 from utils import get_ints_from_string
 
@@ -9,14 +10,20 @@ class Test:
         self.file_context = file_context
         self.bush_graph = nx.DiGraph()
         self.fire_loop = 0
+        logging.basicConfig(stream=sys.stdout,
+                            level=logging.INFO)
         self.__process_bush_relations()
         
     def __process_bush_relations(self):
         num_bushes, starting_burn, _ = get_ints_from_string(self.file_context.readline())
+        logging.debug("The number of bushes in the graph is: " + str(num_bushes))
+        logging.debug("The number of the bush starting to burn is: " + str(starting_burn))
         for i in range(num_bushes):
-            node_and_edge_rels = self.file_context.readline().split(" ")
+            node_and_edge_rels = get_ints_from_string(self.file_context.readline())
             node_idx = node_and_edge_rels[0]
+            logging.debug("The node index on this iteration is: " + str(node_idx))
             edge_rels = node_and_edge_rels[1::]
+            logging.debug("The edge relations on this iteration are: " + str(edge_rels))
             del node_and_edge_rels
  
             # Adding node_idx as part of the tuple here allows the data to be
@@ -64,15 +71,20 @@ class Test:
         # but implies it will.
         self.bush_graph.remove_nodes_from(on_fire_bushes)
     
-    def __successfully_protect_bushes(self):        
+    def __successfully_protect_bushes(self):
+        logging.debug("Inside of the protect_bushes method.")
+        logging.debug("The number of nodes in the graph is: " + str(self.bush_graph.number_of_nodes()))
+        logging.debug("The number of sentimental bushes is of length: " + len(self.sentimental_bushes))
+        logging.debug("We saved at least the bushes we cared about: " + str(set(self.sentimental_bushes).issubset(self.bush_graph.nodes)))
         if self.bush_graph.number_of_nodes() >= len(self.sentimental_bushes) \
-            and set(self.sentimental_bushes) in self.bush_graph.nodes:
+            and set(self.sentimental_bushes).issubset(self.bush_graph.nodes):
             logging.info("Yes")
         elif self.bush_graph.number_of_nodes() < len(self.sentimental_bushes):
             logging.info("No")
     
     def run_burn_simulation(self):
         while(True in self.__get_burn_status()):
+            logging.debug("Inside of fire loop")
             self.__protect_bush()
             self.__spread_fire()
             self.fire_loop += 1            

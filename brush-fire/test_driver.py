@@ -7,7 +7,7 @@ def process_parameters():
     parser.add_argument('test_file',
                         help='A test file containing graph data to run burn simulations on.')
     args = parser.parse_args()
-    return args
+    return args.test_file
 
 def main():
   test_file = process_parameters()
