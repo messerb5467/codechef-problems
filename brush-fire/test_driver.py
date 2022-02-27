@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 from test import Test
 
@@ -14,3 +15,6 @@ def main():
     for _ in range(num_tests):
         tester = Test(f)
         tester.run_burn_simulation()
+
+if __name__ == '__main__':
+    main()
