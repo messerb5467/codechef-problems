@@ -1,7 +1,7 @@
 import networkx as nx
 import logging
-from .bush import Bush
-from .utils import get_ints_from_string
+from bush import Bush
+from utils import get_ints_from_string
 
 class Test:
     def __init__(self,
