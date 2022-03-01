@@ -12,7 +12,7 @@ def process_parameters():
 def main():
   test_file = process_parameters()
   with open(test_file) as f:
-    num_tests = int(f.readline())
+    num_tests = int(f.readline().strip())
     for _ in range(num_tests):
         tester = Test(f)
         tester.run_burn_simulation()
