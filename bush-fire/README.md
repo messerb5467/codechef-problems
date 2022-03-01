@@ -2,6 +2,7 @@
 The [Code Chef brush fire problem](https://www.codechef.com/problems/FIRE) proposes a scenario where a series of bushes around your house are arranged as a Directed Acyclic Graph (DAG) similar to what is shown below:
 
 ![DAG Example](220px-Tred-G.svg.png)
+
 For this problem, the number of nodes and the relationships between them are dynamic on a per testcase basis and are laid out in the following manner:
 ```
 3 -> Number of testcases present in the file.
