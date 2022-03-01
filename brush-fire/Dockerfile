@@ -16,4 +16,4 @@ USER $USER
 COPY * $HOME/brush-fire/
 WORKDIR $HOME/brush-fire
 RUN pip3 install -r requirements.txt
-CMD python3 ${HOME}/brush-fire/test_driver.py 'bush_graph_data.txt'
+ENTRYPOINT python3 ${HOME}/brush-fire/test_driver.py 'bush_graph_data.txt'
